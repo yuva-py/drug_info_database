@@ -3,6 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 import spacy
 from sqlalchemy import Column, Integer, ForeignKey,Table
 from spacy.matcher import PhraseMatcher
+import os
+from dotenv import load_dotenv
+import logging
 
 # Initialize SQLAlchemy
 db = SQLAlchemy()
@@ -191,18 +194,28 @@ SYNONYM_MAP = {
     'heart palpitations': ['racing heart', 'fluttering heart', 'feeling heart pound', 'tachycardia'],
     'weight loss': ['losing weight', 'unintentional weight loss', 'weight drop', 'becoming fat']}
 
+load_dotenv()
+
 app = Flask(__name__)
 app.secret_key = 'the_name_is_yuvaraj'
 
-# MySQL configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:mykyuvaraj1556@localhost/drug_database'
+# Get values securely from environment
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASS")
+DB_NAME = os.getenv("DB_NAME")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
+
+# SQLAlchemy config using the env vars
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Initialize your SQLAlchemy db
+db = SQLAlchemy()
 db.init_app(app)
 
-import logging
-# Configure logging level
+# Set up logging
 logging.basicConfig(level=logging.INFO)
-
 # Global variable to store extracted and normalized symptoms
 extracted_symptoms_store = []
 
