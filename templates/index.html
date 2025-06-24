@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sympcure - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+    <div class="left-section">
+        <h1 class="headline">Stop guessing, Start knowing</h1>
+        <h2 class="subheadline">Discover the root cause of your discomfort.</h2>
+        <p class="highlight">Find relief, fast.</p>
+        <div class="buttons">
+            <button class="primary-btn" id="findAnswers">Find Answers</button>
+            <button class="secondary-btn">Learn More</button>
+        </div>
+    </div>
+    <div class="right-section">
+        <img src="{{ url_for('static', filename='health-image.png') }}" alt="Health" class="side-image">
+    </div>
+</div>
+
+<!-- Include GSAP library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

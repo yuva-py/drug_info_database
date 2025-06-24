@@ -1,0 +1,810 @@
+* {
+  margin: 0;
+  padding: 0;
+  
+}
+/* General Body and Container Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(
+    120deg,
+    #f5e3d3,
+    #f7cabd
+  ); /* Soft beige to pale peach gradient */
+  color: #333; /* Dark text for contrast */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Add margin to prevent hero content merging with the navbar */
+.hero {
+  margin-top: 100px; /* Add space to account for the fixed navbar's height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: calc(100vh - 100px); /* Adjust height to account for navbar */
+  background: transparent;
+  padding: 0 20px;
+  position: relative;
+  z-index: 5;
+}
+
+
+.roboto-condensed-headline {
+  font-size: 3rem;
+  animation: slideIn 1s ease-out; /* Sliding effect for entry */
+  margin: 0;
+}
+@media screen and (max-width: 768px) {
+    .roboto-condensed-headline {
+      font-size: 2rem; /* Scale down for smaller screens */
+    }
+  }
+  
+/* Character animation styles */
+.main-title span,
+.highlight-text span {
+  opacity: 0; /* Initially hide characters */
+  display: inline-block; /* Make each character an inline block */
+}
+
+/* Hover effects for the headline */
+.roboto-condensed-headline:hover {
+  color: #ff6f61; /* Change color to coral on hover */
+  text-shadow: 0px 0px 10px rgba(255, 111, 97, 0.8); /* Add glow */
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Neumorphism Card Style */
+.neumorphic-card {
+  background: #f5e3d3; /* Soft beige background */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1),
+    -8px -8px 15px rgba(255, 255, 255, 0.7); /* Neumorphic shadow */
+  padding: 30px;
+  transition: box-shadow 0.3s ease;
+}
+
+.neumorphic-card:hover {
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2),
+    -4px -4px 10px rgba(255, 255, 255, 0.9); /* Darker shadow on hover */
+}
+
+/* Transparent Navbar for Hero Section */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: transparent; /* Transparent for the hero section */
+  padding: 15px 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+/* Sticky Navbar after scrolling */
+.navbar.sticky {
+  background: rgba(255, 255, 255, 0.9); /* Slightly opaque white */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 20px; /* Rounded corners for neumorphic effect */
+}
+
+/* Navbar Links */
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-links a {
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+  color: #4b4e8f;
+  background: #f5e3d3;
+  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1),
+    -8px -8px 15px rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-links a:hover {
+  color: #ff6f61;
+  background: #e8c2b0;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15),
+    -4px -4px 10px rgba(255, 255, 255, 0.7);
+}
+
+/* Logo and Lottie Animation */
+.logo-img {
+  height: 50px;
+  width: 200px;
+  object-fit: cover;
+  background-color: transparent;
+}
+
+.lottie-container {
+  width: 150px;
+  height: 150px;
+  margin-left: 1425px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.navbar-logo-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.main-content {
+  padding: 100px 50px; /* Spacing for main content */
+}
+
+
+/* Overlay content for buttons and text */
+.overlay-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 100; /* Increase z-index to ensure it appears on top of backgrounds */
+}
+
+/* Ensure buttons are properly aligned and visible */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem; /* Space between buttons */
+  margin-top: 20px;
+  z-index: 200; /* Higher than the overlay-content */
+}
+
+/* Base button styles */
+button {
+  position: relative;
+  z-index: 300; /* Ensure buttons appear above all content */
+  padding: 15px 40px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  color: white;
+  overflow: hidden; /* Confine the progress bar within the button */
+  transition: all 0.3s ease;
+}
+
+/* Text inside the button */
+.button-text {
+  position: relative;
+  z-index: 350; /* Ensure the text is above the progress bar */
+  color: white;
+}
+
+/* Progress bar inside the button */
+.button-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0; /* Hidden initially */
+  height: 100%; /* Full height of the button */
+  background-color: #6f93ff;
+  z-index: 250; /* Below the text but above the button background */
+  transition: width 0.6s ease; /* Smooth expand animation */
+}
+
+/* On hover, expand the progress bar */
+button:hover .button-progress {
+  width: 100%; /* Expand the progress bar on hover */
+}
+
+/* Primary Button Gradient */
+.primary-btn {
+  background: linear-gradient(145deg, #ff6f61, #e85850);
+}
+
+.primary-btn:hover {
+  background: linear-gradient(145deg, #ff6f61, #e85850);
+}
+
+/* Secondary Button Gradient */
+.secondary-btn {
+  background: linear-gradient(145deg, #4b4e8f, #3a3c6d);
+}
+
+.secondary-btn:hover {
+  background: linear-gradient(145deg, #4b4e8f, #3a3c6d);
+}
+
+/* Spline Viewer fix */
+.spline-viewer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1; /* Keep behind the content */
+}
+
+/* Ensure the parallax layer stays in the background */
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Ensure it's behind all other content */
+}
+
+
+
+
+/* Grid Container for Asymmetrical Layout */
+.grid-container {
+  display: flex;               /* Use flexbox layout */       
+  width: 200%;
+  flex-wrap: nowrap;
+  overflow-x: auto;            /* Enable horizontal scrolling */
+  overflow-y: hidden;          /* Disable vertical scrolling */
+  justify-content: flex-start; /* Align items to the start */
+  gap: 50px;                  /* Space between cards */
+  padding: 20px;              /* Padding around the container */
+
+}
+
+/* Parallax Container */
+.parallax-container {
+  position: relative;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 1px; /* Perspective for 3D effect */
+  transform-style: preserve-3d;
+}
+
+
+/* Adjust the spacing between the sections */
+.overlay-content > * {
+  margin-bottom: 1rem;
+}
+
+/* Optional: Adjust z-index for text over Spline animation */
+.overlay-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Vertically center the content */
+  top: 50%; /* Centers the content vertically */
+  left: 50%; /* Adjust this to move content right of center */
+  transform: translate(-50%, -50%); /* Ensures proper centering */
+  z-index: 100; /* Ensures content stays on top of the animation */
+}
+
+
+
+/* 1. Make the headline bolder and on one line */
+.overlay-content h1 {
+  font-size: 4rem; /* Adjust font size to fit in one line */
+  font-weight: 700; /* Increase weight for emphasis */
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin: 0 auto;
+  line-height: 1.1; /* Adjust line-height */
+  white-space: nowrap; /* Ensure it stays on one line */
+  width: 100%; /* Ensure it spreads across the width */
+}
+
+/* 2. Subheading customization */
+.overlay-content h2 {
+  font-size: 1.5rem;
+  letter-spacing: 0.1em; /* Increase spacing between letters */
+  color: olive;
+  text-align: center;
+  margin-top: 1rem;
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: rgb(238, 238, 236); /* Transparent Background Highlight */
+  padding: 8px 20px;
+  border-radius: 5px;
+  letter-spacing: 0.2em;
+  color: #140c7e;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8),
+    -1px -1px 2px rgba(0, 0, 0, 0.1); /* Letterpress Effect */
+}
+
+/* 3. Emphasize "Find relief, fast" text */
+.overlay-content p.highlight {
+  font-size: 1.3rem;
+  font-weight: 600; /* Increase weight for emphasis */
+  text-align: center;
+  text-transform: uppercase;
+  color: #140c7e;
+  background-color: rgba(255, 105, 180, 0.1);
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-shadow: 0 0 10px rgba(236, 235, 189, 0.8); /* Glow Effect */
+}
+
+.overlay-content p.highlight span.fast {
+  color: red; /* Highlight "fast" in red */
+  font-weight: 700; /* Make "fast" even bolder */
+  text-transform: uppercase;
+}
+
+button:hover .button-progress {
+  transform: translateX(0); /* Move into view */
+}
+
+
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Text Glow Animation */
+@keyframes text-glow {
+  from {
+    text-shadow: 2px 2px 5px rgb(3, 215, 243);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(133, 166, 242, 0.952);
+  }
+}
+
+/* Parallax Scrolling Effect */
+.parallax {
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* How It Works Section */
+.how-it-works {
+  padding: 90px 20px; /* Add padding for spacing */
+  text-align: left; /* Align text to the left */
+}
+
+.header-text {
+  margin-bottom: 20px; /* Space between header and highlight text */
+}
+
+.small-text {
+  font-size: 14px; /* Small text size */
+  color: #666; /* Grey color for subtlety */
+  text-transform: uppercase; /* Uppercase for emphasis */
+}
+
+.main-title {
+  font-size: 28px; /* Main title size */
+  font-weight: bold; /* Bold font for emphasis */
+  color: #333; /* Dark color for contrast */
+  margin: 5px 0; /* Margin around title */
+}
+
+.highlight-text {
+  font-size: 16px; /* Normal font size for highlight text */
+  color: #444; /* Slightly darker for contrast */
+  line-height: 1.5; /* Line height for readability */
+  margin-bottom: 40px; /* Space below highlight text */
+}
+
+/* Neumorphic Input Field */
+input {
+  padding: 15px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: none;
+  background: #f5e3d3; /* Soft beige background for input */
+  box-shadow: inset 8px 8px 15px rgba(0, 0, 0, 0.1),
+    inset -8px -8px 15px rgba(255, 255, 255, 0.7); /* Neumorphic inner shadow */
+  transition: box-shadow 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.2),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.9); /* Inner shadow on focus */
+}
+
+/* Neumorphic Card Styles */
+.card {
+  background: #f5e3d3; /* Card background color */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), 
+              -8px -8px 15px rgba(255, 255, 255, 0.7); /* Neumorphic shadow */
+  padding: 20px; /* Inner padding */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition for hover effects */
+  display: flex; /* Flexible layout */
+  flex-direction: column; /* Stack children vertically */
+  opacity: 0; /* Initially hidden for animation */
+  transform: translateY(20px); /* Initial position (slide-in effect) */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Animation transition */
+}
+
+/* Card appears when in view (fade-in and slide-in) */
+.card.show {
+  opacity: 1; /* Fully visible */
+  transform: translateY(0); /* Return to original position */
+}
+
+/* Hover Effects for Cards */
+.card:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2),
+              -4px -4px 10px rgba(255, 255, 255, 0.9); /* Darker shadow on hover */
+}
+
+/* Card Size Adjustments */
+.card.large {
+  flex: 1 1 calc(70% - 20px); /* Takes up 70% width */
+  height: 700px;
+}
+
+.card.medium {
+  flex: 1 1 calc(50% - 20px); /* Takes up 50% width */
+  height: 500px;
+}
+
+.card.var {
+  flex: 1 1 calc(40% - 20px); 
+  height: 550px;
+}
+
+.card.small {
+  flex: 1 1 calc(30% - 20px); /* Takes up 30% width */
+  height: 600px;
+}
+
+/* Card Image Style */
+.card-image {
+  width: 100%; /* Full width image */
+  border-radius: 10px; /* Rounded corners for the image */
+}
+
+/* Button Styles for Cards */
+.card-button {
+  position: relative;
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  opacity: 1;
+  overflow: hidden;
+}
+
+/* Background transition */
+.card-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #66bb6a;
+  transition: transform 0.5s ease;
+  transform: translateX(-100%);
+}
+
+.card-button:hover::before {
+  transform: translateX(0);
+}
+
+.card-button:hover span {
+  opacity: 1;
+  color: white;
+}
+
+/* Lottie Animation Style */
+.lottie-animation {
+  width: 100%; /* Full width animation */
+  height: 200px; /* Set height */
+  margin-bottom: 10px;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .grid-container {
+    display: block;
+    padding: 20px;
+  }
+  .card {
+    margin-bottom: 20px;
+  }
+}
+
+.search-section {
+  padding: 60px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.search-suggestions {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  display: none;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  border-radius: 4px;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.search-suggestions p {
+  margin: 5px 0;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.search-suggestions p:hover {
+  background-color: #f0f0f0;
+}
+
+.search-content {
+  flex: 1;
+  text-align: left;
+}
+
+.search-bar-container {
+  flex-basis: 40%;
+  display: flex; /* Use flexbox to align the search bar and button side by side */
+  justify-content: flex-end; /* Ensure the items stay on the right */
+  align-items: center; /* Vertically center the search bar and button */
+  margin-top: 450px; /* Add margin to create more space above the search bar */
+}
+
+.search-bar {
+  width: 80%; /* Adjust the width of the search bar */
+  padding: 12px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-button {
+  padding: 12px 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-left: 10px; /* Add a small gap between the search bar and button */
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+* {
+    margin: 0;
+    padding: 0;
+    
+}
+/* Footer Section */
+
+.footer {
+  background: linear-gradient(
+    120deg,
+    #FF6B6B,
+    #D98880
+  );
+  color: #fff;
+  padding: 60px 0;
+  text-align: center;
+  position: relative;
+  border-start-start-radius: 1000px;
+  border-start-end-radius: 1000px;
+  
+  /* Adding shadows for 3D effect */
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.3), -20px -20px 40px rgba(255, 255, 255, 0.2);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  flex: 1;
+}
+
+.footer-brand img {
+  max-width: 150px;
+}
+
+.footer-links {
+  flex: 2;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-column a {
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 10px;
+  
+  /* Adding text shadow for 3D effect */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.footer-socials {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer-socials a {
+  color: #fff;
+  margin-left: 15px;
+  font-size: 24px;
+  
+  /* Add 3D shadow effect to icons */
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+}
+
+.footer-socials a:hover {
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.5), -8px -8px 20px rgba(255, 255, 255, 0.2);
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.footer-bottom p {
+  margin: 0;
+  
+  /* Adding text shadow to footer text */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+/* From Uiverse.io by aadium */ 
+.code {
+  width: auto;
+  height: auto;
+  background: #15001f;
+  border: 1px solid #c042ff;
+  font-size: 14px;
+  font-family: monospace;
+  overflow: auto;
+}
+
+.titlebar {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 21px;
+  font-weight: 450;
+  background-color: #2e0043;
+  width: 100%;
+  text-align: right;
+}
+
+.code button {
+  width: 40px;
+  height: 35px;
+  margin-left: -5px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  transition: 0.2s;
+}
+
+button svg path, 
+button svg rect, 
+button svg polygon {
+  fill: #ffffff;
+}
+
+button svg {
+  width: 10px;
+  height: 10px;
+}
+
+.close:hover {
+  background-color: #e81123;
+}
+
+.maximize:hover {
+  background-color: #c042ff2e;
+}
+
+.minimize:hover {
+  background-color: #c042ff2e;
+}
+
+#pre {
+  overflow: auto;
+  width: 100%;
+  padding: 10px;
+  height: auto;
+  color: #bafff8;
+}
+
+.curlies {
+  color: #ff0000;
+}
+
+.sc {
+  color: #e600ff;
+}
+
+.rounds {
+  color: #ffffff;
+}
+
+.operator {
+  color: #ffff00;
+}
+
+.s1 {
+  color: #22ff00;
+}
+
+.s2 {
+  color: #4281ff;
+}
+
+.s3 {
+  color: #ff4284;
+}
+
+.s4 {
+  color: #ffae00;
+}
+
+.s5 {
+  color: #ffffff;
+}
+
+.s6 {
+  color: #ffff00;
+}

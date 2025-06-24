@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Drug Information Database</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>About the Drug Information Database</h1>
+        <p>Welcome to the Drug Information Database. This web application helps users search for drugs, recommend medicines based on symptoms, and provide detailed information about various drugs.</p>
+
+        <h2>Features</h2>
+        <ul>
+            <li><strong>Search for Drugs:</strong> Use the search functionality to look up drugs by name or description.</li>
+            <li><strong>Symptom-based Recommendations:</strong> Enter your symptoms to receive medicine recommendations from the system.</li>
+            <li><strong>Add New Drugs:</strong> Administrators can add new drugs to the database using the 'Add Drug' functionality.</li>
+            <li><strong>Medical Information:</strong> View in-depth information about drugs, their uses, and side effects.</li>
+        </ul>
+
+        <h2>How to Use</h2>
+        <ol>
+            <li><strong>Search for Drugs:</strong> Navigate to the search page, enter a drug name or a symptom, and view relevant results.</li>
+            <li><strong>Get Recommendations:</strong> Use the symptom input to receive suggestions on what medicines may help alleviate your symptoms.</li>
+            <li><strong>View Details:</strong> Each drug result provides detailed information, including its uses, side effects, and more.</li>
+        </ol>
+    </div>
+
+<div class="code">
+    <div class="titlebar">Drug Information Database</div>
+    <pre id="pre">
+  <span class="sc"># Description:</span> 
+  This web application serves as a comprehensive <span class="s4">drug information database</span>. 
+  Users can search for drugs, add new drugs, and find suitable medications based on symptoms.
+  
+  <span class="sc"># Key Features:</span>
+  <ul>
+    <li>Add drugs to the database</li>
+    <li>Search drugs by name or description</li>
+    <li>Match symptoms to recommended medications</li>
+    <li>Interactive chat interface</li>
+  </ul>
+  
+  <span class="sc"># app.py - Main Logic:</span>
+  - The <span class="s1">app.py</span> file sets up the core Flask application.
+  - It configures the database URI to use MySQL for storing drug and symptom data.
+  - Routes handle interactions: 
+     <span class="s3">/add_drug</span> allows users to input new drug information.
+     <span class="s3">/search_drug</span> enables users to search and retrieve information.
+  - It integrates AJAX for smooth, real-time search functionality and symptom-matching logic.
+  
+  <span class="sc"># templates:</span>
+  - <span class="s1">home.html</span>: The main page has a search bar where users input symptoms or drug names. It is linked to the <span class="s3">drug recommendation system</span>.
+  - <span class="s1">add_drug.html</span>: Allows users to add information for new drugs, including name, symptoms treated, side effects, etc.
+  - <span class="s1">search.html</span>: Displays drug details when a user searches for specific drugs or symptoms.
+  
+  <span class="sc"># Database Structure:</span>
+  - The MySQL database contains tables such as:
+    <span class="s1">Drug</span>, <span class="s1">Symptom</span>, <span class="s1">Disease</span>, and <span class="s1">BodySystem</span>. 
+    These tables store all necessary information like drug names, symptoms treated, and diagnoses.
+    
+  - The <span class="s1">Drug</span> model holds drug data, which is cross-referenced with <span class="s2">Symptom</span> and <span class="s2">Disease</span> tables.
+  
+  <span class="sc"># Logic:</span>
+  - When a user enters symptoms, the system searches the <span class="s1">Symptom</span> table to match the symptoms. 
+  - If no diseases match, the system looks for drugs that treat the symptoms, pulling from the <span class="s2">drug_database</span>.
+  - If the symptom matches a <span class="s1">Disease</span>, information like diagnosis and treatment options are displayed instead of drugs.
+  
+  <span class="sc"># Frontend:</span>
+  - The UI is interactive, with modern features like <span class="s4">hover effects</span>, a <span class="s4">progress bar</span>, and buttons styled for quick access.
+  - The <span class="s1">chat feature</span> is embedded at the bottom of the homepage, allowing users to input symptoms and get quick responses.
+  
+  <span class="sc"># search_drug AJAX Call:</span>
+  - When a user searches for a drug, an AJAX request fetches drug details from the database without refreshing the page.
+  - It enhances user experience, making the search dynamic and faster.
+  
+  <span class="sc"># Conclusion:</span>
+  The Drug Information Database is designed to simplify the process of finding drug and symptom-related data with an interactive, user-friendly interface.
+  </pre>
+  <footer>
+    <p>&copy; 2024 Drug Information Database. All rights reserved.</p>
+</footer>
+  </div>
+</body>
+</html>
+  

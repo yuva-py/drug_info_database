@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Drugs for Symptoms</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Title displaying symptoms if available -->
+        <h1 class="text-center mb-4">Matching Drugs for Symptoms: "{{ symptoms or 'N/A' }}"</h1>
+        
+        <!-- Flash messages for success or failure -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} mt-3">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <!-- List of matching drugs -->
+        <!-- search_results.html -->
+        {% if results %}
+            <h2>Search Results</h2>
+            <table class="table table-striped mt-3">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Uses</th>
+                        <th>Symptoms</th>
+                        <th>Side Effects</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for drug in results %}
+                        <tr>
+                            <td>{{ drug.name }}</td>
+                            <td>{{ drug.uses }}</td>
+                            <td>{{ drug.symptoms }}</td>
+                            <td>{{ drug.side_effects }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+        
+        
+        <!-- Button to navigate back to the home page -->
+        <div class="text-center mt-4">
+            <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript and Bootstrap dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

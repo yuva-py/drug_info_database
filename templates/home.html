@@ -1,0 +1,450 @@
+{% extends "base.html" %} {% block title %}Sympcure - Home{% endblock %} {%
+block content %}
+<nav class="navbar">
+  <div class="navbar-logo-container">
+    <img
+      src="{{ url_for('static', filename='images/symp.png') }}"
+      alt="Sympcure Logo"
+      class="logo-img"
+    />
+    <div id="lottie-animation" class="lottie-container"></div>
+  </div>
+  <div class="navbar-links">
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('about') }}">About Us</a>
+    <a href="{{ url_for('show_add_drug_form')}}">Add drugs</a>
+  </div>
+</nav>
+
+<!-- Full-screen Container for the Spline animation and text -->
+<div class="parallax-container">
+  <div class="parallax-layer" data-speed="0.5">
+    <script
+      type="module"
+      src="https://unpkg.com/@splinetool/viewer@1.9.28/build/spline-viewer.js"
+    ></script>
+    <spline-viewer
+      url="https://prod.spline.design/0Tw0UURP6MpHF1wa/scene.splinecode"
+      style="background: transparent; width: 100%; height: 100vh"
+    ></spline-viewer>
+  </div>
+  <div class="parallax-layer" data-speed="0.9">
+    <div class="overlay-content">
+      <h1 class="roboto-condensed-headline">Stop guessing, Start knowing</h1>
+      <h2 class="roboto-condensed-subheadline">
+        Discover the root cause of your discomfort.
+      </h2>
+      <p class="highlight">Find relief, <span class="fast">fast</span>.</p>
+      <div class="buttons">
+          <!-- Button for Get Started (Linked to /chat route) -->
+          <a href="/chat">
+            <button class="primary-btn">
+              <span class="button-text">Get Started</span>
+              <div class="button-progress"></div>
+            </button>
+          </a>
+
+          <!-- Button for Learn More (Linked to /about route) -->
+          <a href="/about">
+            <button class="secondary-btn">
+              <span class="button-text">Learn More</span>
+              <div class="button-progress"></div>
+            </button>
+          </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- How It Works Section -->
+<div class="how-it-works">
+  <div class="header-text">
+    <p class="small-text">Analyze</p>
+    <h1 class="main-title" id="title">These tools are great</h1>
+  </div>
+  <div class="highlight-text">
+    <p id="highlight">
+      Our innovative tool empowers you to take control of your health. Simply
+      input your symptoms, and our system will analyze them to provide valuable
+      insights. Experience a seamless process that guides you towards
+      understanding your health better.
+    </p>
+  </div>
+</div>
+
+<!-- Grid Section with Asymmetry Layout -->
+<!-- Grid Section with Asymmetry Layout -->
+<div class="grid-container">
+    
+  <div class="card large">
+    <div
+      class="lottie-animation"
+      data-animation="{{ url_for('static', filename='lottie/animation_1.json') }}"
+    ></div>
+    <h2 class="main-title">
+      Your Personalized Medical Advisor: Always Available
+    </h2>
+    <p>
+      Welcome to your health companion—an AI-driven chatbot that serves as your
+      personalized medical advisor. Our innovative tool is designed to assist
+      you in managing your health effectively and efficiently.
+    </p>
+
+    <h3>Key Features:</h3>
+    <ul>
+      <li>
+        <strong>Natural Language Processing:</strong> Our chatbot understands
+        and responds to natural language queries, making it easy for you to ask
+        questions in plain language.
+      </li>
+      <li>
+        <strong>Personalized Recommendations:</strong> Based on your symptoms
+        and medical history, our chatbot can provide tailored recommendations
+        and advice to help you make informed health decisions.
+      </li>
+      <li>
+        <strong>24/7 Availability:</strong> Your health advisor is available
+        round the clock, ensuring you receive support whenever you need it, no
+        matter the time of day.
+      </li>
+      <li>
+        <strong>Instant Insights:</strong> Quickly obtain insights about your
+        health concerns, helping you understand your condition better and
+        guiding you towards effective solutions.
+      </li>
+    </ul>
+  </div>
+    <div class="card small">
+    <h2>How It Works:</h2>
+    <p>
+      Simply ask your questions related to your symptoms or health concerns, and
+      our chatbot will analyze the information you provide. It utilizes advanced
+      algorithms to deliver relevant information, guiding you toward better
+      health decisions.
+    </p>
+
+    <p>
+      Take control of your health with your personalized medical advisor,
+      designed to empower you with the knowledge and support you need!
+    </p>
+
+    <a href="{{ url_for('chat') }}">
+      <button class="card-button">
+          <span>Start Now</span>
+      </button>
+  </a>  
+  </div>
+  
+  <div class="card medium">
+    <div
+      class="lottie-animation"
+      data-animation="{{ url_for('static', filename='lottie/animation_2.json') }}"
+    ></div>
+    <h2>Receive Tailored Insights and Recommendations</h2>
+    <p>
+      Our advanced algorithms analyze your symptoms and medical history to
+      provide personalized insights and recommendations. You'll receive tailored
+      advice based on your unique needs, benefiting from accurate symptom
+      analysis and expert guidance from our team of healthcare professionals.
+    </p>
+  </div>
+  <div class="card small">
+    <div
+      class="lottie-animation"
+      data-animation="{{ url_for('static', filename='lottie/animation_3.json') }}"
+    ></div>
+    <h2>Get Insights</h2>
+  </div>
+  <div class="card var">
+    <div
+      class="lottie-animation"
+      data-animation="{{ url_for('static', filename='lottie/animation_4.json') }}"
+    ></div>
+    <h2>Explore Treatment Options and Next Steps</h2>
+    <p>
+      Discover a range of treatment options tailored to your specific needs. Our
+      platform provides comprehensive information and guidance to help you
+      navigate your healthcare journey. From medication to lifestyle changes,
+      we'll assist you in making informed decisions about your health.
+    </p>
+  </div>
+</div>
+
+<!-- Flash Messages -->
+<div class="mt-3">
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <ul class="list-group">
+    {% for message in messages %}
+    <li class="list-group-item">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endwith %}
+</div>
+<section class="search-section">
+  <div class="container">
+    <h2 class="roboto-condensed-subheadline">
+      Search Our Extensive Database Of Medical Information
+    </h2>
+    <p class="highlight">
+      Easily find information on medicines, symptoms, and treatments. Use
+      specific keywords or explore popular searches to get quick results.
+    </p>
+    <!-- Update this form in home.html -->
+<div class="search-bar-container">
+  <form action="{{ url_for('search_drugs_page') }}" method="get">
+    <input
+      type="text"
+      id="search-bar"
+      name="query"  
+      placeholder="Enter symptoms, medicine names, or keywords"
+      class="search-bar"
+    />
+    <button type="submit" class="search-button">Search</button>
+  </form>
+</div>
+
+  </div>
+</section>
+<!-- Footer Section -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <img src="{{ url_for('static', filename='images/symp.png') }}" alt="Sympcure Logo" class="footer-logo">
+      <p>Sympcure empowers you to work on your health.</p>
+    </div>
+
+    <div class="footer-links">
+      <div class="footer-column">
+        <a href="#">For Patients</a>
+        <a href="#">For Doctors</a>
+        <a href="#">Our Mission</a>
+      </div>
+      <div class="footer-column">
+        <a href="#">Contact</a>
+        <a href="#">FAQ</a>
+        <a href="#">Blog</a>
+      </div>
+    </div>
+
+    <div class="footer-socials">
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="#"><i class="fab fa-tiktok"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2024 Sympcure. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+{% endblock %} {% block scripts %}
+<script>gsap.set(".primary-btn, .secondary-btn", { opacity: 1, zIndex: 3000 });</script>
+
+<script>
+
+
+  // Throttle function to limit scroll event firing
+  function throttle(fn, wait) {
+    let time = Date.now();
+    return function () {
+      if ((time + wait - Date.now()) < 0) {
+        fn();
+        time = Date.now();
+      }
+    };
+  }
+
+  // Sticky Navbar implementation with throttled scroll event
+  window.addEventListener('scroll', throttle(function () {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 100) { 
+      navbar.classList.add('sticky');
+    } else {
+      navbar.classList.remove('sticky');
+    }
+  }, 100)); 
+
+  // GSAP ScrollTrigger and IntersectionObserver for animations
+  document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll('.card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.25 // Trigger when 25% of the card is in view
+    });
+
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+  });
+
+  // GSAP scroll animations with ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Function to replace text with GSAP animation
+  function replaceText(element, newText, duration) {
+    const chars = newText.split("");
+    const timeline = gsap.timeline();
+    element.innerHTML = ""; // Clear original text
+
+    chars.forEach((char, index) => {
+      const span = document.createElement("span");
+      span.innerHTML = char;
+      span.style.opacity = 0; // Hide initially
+      element.appendChild(span);
+      
+      timeline.to(span, {
+        duration: duration / chars.length,
+        opacity: 1,
+        ease: "power1.inOut",
+        delay: index * (duration / chars.length),
+      }, 0);
+    });
+
+    timeline.call(() => {
+      element.innerHTML = newText;
+    }, null, null, `+=${duration}`);
+  }
+
+  // Triggered animations on page load
+  window.onload = function () {
+    gsap.from(".roboto-condensed-headline", { duration: 1, x: -200, opacity: 0 });
+    gsap.from(".roboto-condensed-subheadline", { duration: 1.2, x: -200, opacity: 0, delay: 0.3 });
+    gsap.from(".highlight", { duration: 1.4, x: -200, opacity: 0, delay: 0.5 });
+    gsap.from(".primary-btn", { duration: 1.5, scale: 0.8, opacity: 0, delay: 0.7 });
+    gsap.from(".secondary-btn", { duration: 1.5, scale: 0.8, opacity: 0, delay: 0.9 });
+
+    // ScrollTrigger for "How It Works" section
+    ScrollTrigger.create({
+      trigger: ".how-it-works",
+      start: "top 45%",
+      onEnter: function () {
+        replaceText(document.getElementById("title"), "Discover How Our Tools Work for You", 2);
+        replaceText(document.getElementById("highlight"), 
+          "Our innovative tool empowers you to take control of your health. Simply input your symptoms, and our system will analyze them to provide valuable insights. Experience a seamless process that guides you towards understanding your health better.", 4);
+      },
+    });
+
+    // Horizontal scrolling in grid-container
+    gsap.to('.grid-container', {
+    xPercent: -100,
+    ease: 'power2.inOut',  // Smooth easing for better transition
+    scrollTrigger: {
+      trigger: '.grid-container',
+      start: '-10% top',
+      end: '+=2000',    // Adjust for content size
+      scrub: 1.5,       // Smooth scrub for smoother transition
+      pin: true,        // Pin the container while scrolling
+      anticipatePin: 1, // Reduce the jump of the pinned element
+    }
+  });
+
+
+    // Parallax effect on cards
+    gsap.to('.card', {
+      y: (index) => -30 + index * 10,
+      scrollTrigger: {
+        trigger: '.grid-container',
+        start: 'top top',
+        scrub: true,
+      },
+    });
+
+    // Footer section animation
+    gsap.from('.footer', {
+      opacity: 0,
+      y: 50,
+      scrollTrigger: {
+        trigger: '.footer',
+        start: 'top bottom',
+        toggleActions: 'play none none none',
+      },
+    });
+
+    // Search section animation
+    gsap.from('.search-section', {
+      opacity: 0,
+      y: 100,
+      scrollTrigger: {
+        trigger: '.search-section',
+        start: 'top bottom',
+        toggleActions: 'play none none none',
+      },
+    });
+  };
+
+  // Hover effects for headline and buttons
+  const headline = document.querySelector(".roboto-condensed-headline");
+  headline.addEventListener("mouseenter", () => {
+    gsap.to(headline, { duration: 0.5, color: "#ff6f61", textShadow: "0px 0px 10px rgba(255, 111, 97, 0.8)" });
+  });
+  headline.addEventListener("mouseleave", () => {
+    gsap.to(headline, { duration: 0.5, color: "#ffffff", textShadow: "none" });
+  });
+
+  document.querySelectorAll("button").forEach((button) => {
+    button.addEventListener("mouseenter", () => {
+      gsap.to(button, { duration: 0.3, scale: 1.1, boxShadow: "0 0 10px rgba(255, 111, 97, 0.8)" });
+    });
+    button.addEventListener("mouseleave", () => {
+      gsap.to(button, { duration: 0.3, scale: 1, boxShadow: "none" });
+    });
+  });
+
+  // Parallax effect with requestAnimationFrame for smooth performance
+  window.addEventListener("scroll", function () {
+    window.requestAnimationFrame(() => {
+      document.querySelectorAll(".parallax-layer").forEach((layer) => {
+        const speed = layer.getAttribute("data-speed");
+        const yPos = -(window.scrollY * speed);
+        layer.style.transform = `translate3d(0px, ${yPos}px, 0px)`; 
+      });
+    });
+  });
+
+  // Lazy load Lottie animations
+  document.addEventListener("DOMContentLoaded", function () {
+    const lottieElements = document.querySelectorAll(".lottie-animation");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const animationPath = entry.target.getAttribute("data-animation");
+          lottie.loadAnimation({
+            container: entry.target,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            path: animationPath,
+          });
+          observer.unobserve(entry.target); // Unobserve after load
+        }
+      });
+    }, {
+      threshold: 0.1 // Trigger loading when 10% is visible
+    });
+
+    lottieElements.forEach((element) => observer.observe(element));
+  });
+  function redirectToSearch() {
+    const query = document.getElementById('search-bar').value.trim();
+    if (query) {
+      // Redirect to the search page with the query as a URL parameter
+      window.location.href = `/search?query=${encodeURIComponent(query)}`;
+    } else {
+      alert('Please enter a search query.');
+    }
+  }
+
+  // Search button with input validation
+</script>
+{% endblock %}
