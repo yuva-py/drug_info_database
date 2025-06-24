@@ -1,18 +1,42 @@
 from flask import Flask, render_template, request, redirect, flash, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import spacy
-from sqlalchemy import Column, Integer, ForeignKey,Table
+from sqlalchemy import Column, Integer, ForeignKey, Table
 from spacy.matcher import PhraseMatcher
 import os
 from dotenv import load_dotenv
 import logging
 
-# Initialize SQLAlchemy
-db = SQLAlchemy()
-
-
 # Load spaCy model for NLP
 nlp = spacy.load("en_core_web_sm")
+load_dotenv()
+
+# Create Flask app
+app = Flask(__name__)
+app.secret_key = 'the_name_is_yuvaraj'
+
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASS")
+DB_NAME = os.getenv("DB_NAME")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+# Initialize SQLAlchemy ONCE and bind it to app
+db = SQLAlchemy(app)  # ✅ DO THIS ONCE ONLY
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+
+# Global variable to store extracted and normalized symptoms
+extracted_symptoms_store = []
+
+@app.route('/')
+def home():
+    return render_template('home.html')
 
 # Define association tables
 disease_symptom = db.Table('disease_symptom',
@@ -193,35 +217,6 @@ SYNONYM_MAP = {
     'swelling': ['swollen area', 'inflammation', 'puffiness', 'edema'],
     'heart palpitations': ['racing heart', 'fluttering heart', 'feeling heart pound', 'tachycardia'],
     'weight loss': ['losing weight', 'unintentional weight loss', 'weight drop', 'becoming fat']}
-
-load_dotenv()
-
-app = Flask(__name__)
-app.secret_key = 'the_name_is_yuvaraj'
-
-# Get values securely from environment
-DB_USER = os.getenv("DB_USER")
-DB_PASS = os.getenv("DB_PASS")
-DB_NAME = os.getenv("DB_NAME")
-DB_HOST = os.getenv("DB_HOST")
-DB_PORT = os.getenv("DB_PORT")
-
-# SQLAlchemy config using the env vars
-app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Initialize your SQLAlchemy db
-db = SQLAlchemy()
-db.init_app(app)
-
-# Set up logging
-logging.basicConfig(level=logging.INFO)
-# Global variable to store extracted and normalized symptoms
-extracted_symptoms_store = []
-
-@app.route('/')
-def home():
-    return render_template('home.html')
 
 @app.route('/search', methods=['GET', 'POST'])
 def search_drugs_page():
@@ -584,3 +579,4 @@ def about():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
