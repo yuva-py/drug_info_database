@@ -1,0 +1,43 @@
+# Bytecode & cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environments
+venv/
+myenv/
+.myenv/
+
+# Environment Variables
+.env
+
+# IDE/editor junk
+.vscode/
+*.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Pytest cache
+.cache/
+.pytest_cache/
+
+# Jupyter Notebook checkpoints (just in case)
+.ipynb_checkpoints/
+
+# Database artifacts
+*.sqlite3
+*.db
+
+# Alembic migrations cache
+alembic/versions/__pycache__/
+
+# Logs
+*.log
+
+# Compiled shared libraries
+*.so
+
+# Anything else temporary
+*.swp
