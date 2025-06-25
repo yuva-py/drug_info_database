@@ -23,6 +23,7 @@ DB_PORT = os.getenv("DB_PORT")
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 
 
 # Initialize SQLAlchemy ONCE and bind it to app
