@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   
-}
 /* General Body and Container Styles */
 body {
   margin: 0;
@@ -13,8 +12,7 @@ body {
     #f7cabd
   ); /* Soft beige to pale peach gradient */
   color: #333; /* Dark text for contrast */
-  overflow-x: hidden; /* Prevent horizontal scroll */
-}
+  overflow-x: auto; /* Allow horizontal scroll if necessary */
 
 /* Add margin to prevent hero content merging with the navbar */
 .hero {
@@ -133,10 +131,18 @@ body {
 .lottie-container {
   width: 150px;
   height: 150px;
-  margin-left: 1425px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .lottie-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .navbar-logo-container {
@@ -279,7 +285,7 @@ button:hover .button-progress {
 }
 
 /* Optional: Adjust z-index for text over Spline animation */
-.overlay-content {
+  left: 50%; /* Centers the content horizontally */
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -438,9 +444,9 @@ input:focus {
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition for hover effects */
   display: flex; /* Flexible layout */
   flex-direction: column; /* Stack children vertically */
-  opacity: 0; /* Initially hidden for animation */
+  visibility: hidden; /* Initially hidden for animation */
   transform: translateY(20px); /* Initial position (slide-in effect) */
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Animation transition */
+  transition: visibility 0.6s ease-out, transform 0.6s ease-out; /* Animation transition */
 }
 
 /* Card appears when in view (fade-in and slide-in) */
@@ -578,14 +584,20 @@ input:focus {
   display: flex; /* Use flexbox to align the search bar and button side by side */
   justify-content: flex-end; /* Ensure the items stay on the right */
   align-items: center; /* Vertically center the search bar and button */
-  margin-top: 450px; /* Add margin to create more space above the search bar */
+  margin-top: 10vh; /* Use relative spacing for better responsiveness */
 }
 
 .search-bar {
   width: 80%; /* Adjust the width of the search bar */
   padding: 12px;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Add a border for better visibility */
   border-radius: 50px;
+  font-size: 1rem;
+  background: rgba(0, 0, 0, 0.5); /* Use a darker background for higher contrast */
+  color: white;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.2);
   color: white;
