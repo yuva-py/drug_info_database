@@ -152,3 +152,19 @@ window.addEventListener("scroll", function () {
 
 // Ensure buttons always remain visible
 gsap.set(".primary-btn, .secondary-btn", { opacity: 1, zIndex: 3000 });
+document.addEventListener('DOMContentLoaded', function () {
+  // Intersection Observer for reveal animations
+  const revealEls = document.querySelectorAll('.reveal');
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  revealEls.forEach(el => revealObserver.observe(el));
+});
+
+

@@ -17,62 +17,78 @@ block content %}
 </nav>
 
 <!-- Full-screen Container for the Spline animation and text -->
+<!-- Parallax Container -->
 <div class="parallax-container">
+
+  <!-- Parallax Layer 1: Spline Background -->
   <div class="parallax-layer" data-speed="0.5">
-    <script
-      type="module"
-      src="https://unpkg.com/@splinetool/viewer@1.9.28/build/spline-viewer.js"
-    ></script>
     <spline-viewer
       url="https://prod.spline.design/0Tw0UURP6MpHF1wa/scene.splinecode"
       style="background: transparent; width: 100%; height: 100vh"
     ></spline-viewer>
   </div>
-  <div class="parallax-layer" data-speed="0.9">
+
+  <!-- Parallax Layer 2: (Optional effects layer) -->
+  <div class="parallax-layer" data-speed="0.3">
+    <div id="particles-js"></div>
+  </div>
+
+  <!-- Overlay Foreground -->
+  <div class="overlay">
+    <div class="overlay-bg"></div>
     <div class="overlay-content">
       <h1 class="roboto-condensed-headline">Stop guessing, Start knowing</h1>
       <h2 class="roboto-condensed-subheadline">
         Discover the root cause of your discomfort.
       </h2>
       <p class="highlight">Find relief, <span class="fast">fast</span>.</p>
-      <div class="buttons">
-          <!-- Button for Get Started (Linked to /chat route) -->
-          <a href="/chat">
-            <button class="primary-btn">
-              <span class="button-text">Get Started</span>
-              <div class="button-progress"></div>
-            </button>
-          </a>
 
-          <!-- Button for Learn More (Linked to /about route) -->
-          <a href="/about">
-            <button class="secondary-btn">
-              <span class="button-text">Learn More</span>
-              <div class="button-progress"></div>
-            </button>
-          </a>
+      <div class="buttons">
+        <!-- Button for Get Started -->
+        <a href="/chat">
+          <button class="primary-btn">
+            <span class="button-text">Get Started</span>
+            <div class="button-progress"></div>
+          </button>
+        </a>
+
+        <!-- Button for Learn More -->
+        <a href="/about">
+          <button class="secondary-btn">
+            <span class="button-text">Learn More</span>
+            <div class="button-progress"></div>
+          </button>
+        </a>
+      </div>
+
+      <!-- Scroll Cue -->
+      <div class="scroll-down-cue" onclick="document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' });">
+        ↓ Scroll to explore
       </div>
     </div>
   </div>
+
 </div>
 
-<!-- How It Works Section -->
-<div class="how-it-works">
-  <div class="header-text">
-    <p class="small-text">Analyze</p>
-    <h1 class="main-title" id="title">These tools are great</h1>
-  </div>
-  <div class="highlight-text">
-    <p id="highlight">
-      Our innovative tool empowers you to take control of your health. Simply
-      input your symptoms, and our system will analyze them to provide valuable
-      insights. Experience a seamless process that guides you towards
-      understanding your health better.
-    </p>
-  </div>
+
+<!-- "How It Works" Section (Attach ID Here!) -->
+<div class="how-it-works reveal" id="how-it-works" style="margin-top: 10px;">
+  <h2 class="roboto-condensed-headline" id="title">
+    Discover How Our Tools Work for You
+  </h2>
+  <p class="roboto-condensed-subheadline" id="highlight">
+    Our innovative tool empowers you to take control of your health. Simply
+    input your symptoms, and our system will analyze them to provide valuable
+    insights. Experience a seamless process that guides you towards understanding your health better.
+  </p>
 </div>
 
-<!-- Grid Section with Asymmetry Layout -->
+<!-- Spline Viewer Script -->
+<script
+  type="module"
+  src="https://unpkg.com/@splinetool/viewer@1.9.28/build/spline-viewer.js"
+></script>
+
 <!-- Grid Section with Asymmetry Layout -->
 <div class="grid-container">
     
@@ -180,31 +196,51 @@ block content %}
   </ul>
   {% endif %} {% endwith %}
 </div>
-<section class="search-section">
-  <div class="container">
+<section class="search-section" id="search">
+  <div class="search-content">
     <h2 class="roboto-condensed-subheadline">
       Search Our Extensive Database Of Medical Information
     </h2>
     <p class="highlight">
-      Easily find information on medicines, symptoms, and treatments. Use
-      specific keywords or explore popular searches to get quick results.
+      Easily find information on medicines, symptoms, and treatments. Use specific keywords or explore popular searches to get quick results.
     </p>
-    <!-- Update this form in home.html -->
-<div class="search-bar-container">
-  <form action="{{ url_for('search_drugs_page') }}" method="get">
-    <input
-      type="text"
-      id="search-bar"
-      name="query"  
-      placeholder="Enter symptoms, medicine names, or keywords"
-      class="search-bar"
-    />
-    <button type="submit" class="search-button">Search</button>
-  </form>
-</div>
 
+    <!-- Search Bar -->
+    <div class="search-bar-container">
+      <form action="{{ url_for('search_drugs_page') }}" method="get" style="display: flex; width: 100%;">
+        <input
+          type="text"
+          id="search-bar"
+          name="query"
+          placeholder="Enter symptoms, medicine names, or keywords"
+          class="search-bar"
+          autocomplete="off"
+        />
+        <button type="submit" class="search-button">Search</button>
+      </form>
+
+      <!-- Suggestions Dropdown (optional; can be JS-activated later) -->
+      <div class="search-suggestions" id="search-suggestions">
+        <!-- Example items: to be generated dynamically if needed -->
+        <p>Paracetamol</p>
+        <p>Headache</p>
+        <p>Skin rash</p>
+      </div>
+    </div>
+
+    <!-- Tag Cloud -->
+    <div class="tag-list">
+      <span class="tag">Headache</span>
+      <span class="tag">Fever</span>
+      <span class="tag">Cough</span>
+      <span class="tag">Paracetamol</span>
+      <span class="tag">Skin Rash</span>
+      <span class="tag">Chest Pain</span>
+      <span class="tag">Vomiting</span>
+    </div>
   </div>
 </section>
+
 <!-- Footer Section -->
 <footer class="footer">
   <div class="footer-container">
@@ -243,8 +279,19 @@ block content %}
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 {% endblock %} {% block scripts %}
-<script>gsap.set(".primary-btn, .secondary-btn", { opacity: 1, zIndex: 3000 });</script>
 
+<script>gsap.set(".primary-btn, .secondary-btn", { opacity: 1, zIndex: 3000 });</script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+  window.addEventListener("scroll", () => {
+    const cue = document.querySelector(".scroll-down-cue");
+    if (window.scrollY > 75) {
+      cue.classList.add("hide");
+    } else {
+      cue.classList.remove("hide");
+    }
+  });
+</script>
 <script>
 
 
@@ -444,6 +491,10 @@ block content %}
       alert('Please enter a search query.');
     }
   }
+  particlesJS.load('particles-js', '/static/particles.json', function() {
+  console.log('particles loaded');
+});
+
 
   // Search button with input validation
 </script>
