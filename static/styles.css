@@ -228,7 +228,6 @@ body {
   line-height: 1.1;
   color: #fff;
   background: none;
-  -webkit-background-clip: unset;
   -webkit-text-fill-color: unset;
   text-shadow: 0 0 16px #a7c7e7, 0 0 32px #f7cabd;
   filter: drop-shadow(0 2px 8px #ffb6b6);
